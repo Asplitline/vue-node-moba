@@ -1,0 +1,5 @@
+@base = http://localhost:3000/admin/api
+###
+GET {{base}}/categories
+###
+GET {{base}}/categories/609c0affe0e19b5d84430abf
