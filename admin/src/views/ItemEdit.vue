@@ -1,16 +1,18 @@
 <template>
   <div>
-    <h1>{{id?'编辑':'新建'}}分类</h1>
+    <h1>{{id?'编辑':'新建'}}物品</h1>
     <el-form :model="model" label-width="120px" :rules="rule"
       @submit.native.prevent="save('model')" ref="model">
-      <el-form-item label="上级分类" prop="parent">
-        <el-select v-model="model.parent">
-          <el-option v-for="option in parentOptions" :key="option._id" :value="option._id"
-            :label="option.name"></el-option>
-        </el-select>
-      </el-form-item>
       <el-form-item label="名称" prop="name">
         <el-input v-model="model.name"></el-input>
+      </el-form-item>
+      <el-form-item label="图标" prop="icon">
+        <!-- tag get baseURL -->
+        <el-upload class="avatar-uploader" :action="uploadURL" :show-file-list="false"
+          :on-success="afterSuccess">
+          <img v-if="model.icon" :src="model.icon" class="avatar">
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" native-type="submit">保存</el-button>
@@ -28,8 +30,8 @@ export default {
     return {
       model: {},
       rule: {
-        name: [{ required: true, message: '请输入分类名称', trigger: 'blur' }]
-        // parent: [{ required: true, message: '请选择上级分类', trigger: 'blur' }]
+        name: [{ required: true, message: '请输入物品名称', trigger: 'blur' }],
+        icon: [{ required: true, message: '请选择物品头像', trigger: 'blur' }]
       },
       parentOptions: []
     }
@@ -39,30 +41,25 @@ export default {
       this.$refs[formName].validate(async (valid) => {
         if (!valid) return
         if (!this.id) {
-          await this.$http.post('reset/categories', this[formName])
+          await this.$http.post('reset/items', this[formName])
           this.$message.success('保存成功')
         } else {
-          await this.$http.put(`reset/categories/${this.id}`, this[formName])
+          await this.$http.put(`reset/items/${this.id}`, this[formName])
           this.$message.success('更新成功')
         }
-        this.$router.push('/categories/list')
+        this.$router.push('/items/list')
       })
     },
     async fetchData() {
-      const { data } = await this.$http.get(`reset/categories/${this.id}`)
+      const { data } = await this.$http.get(`reset/items/${this.id}`)
       this.model = data
     },
-    async fetchParentOptions() {
-      const { data } = await this.$http.get('reset/categories')
-      this.parentOptions = data
+    afterSuccess(res) {
+      this.$set(this.model, 'icon', res.url)
     }
   },
   created() {
     this.id && this.fetchData()
-    this.fetchParentOptions()
   }
 }
 </script>
-
-<style>
-</style>
