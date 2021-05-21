@@ -1,0 +1,94 @@
+$base-font-size: 1rem;
+$spacing-base-size: 1rem;
+// color
+$colors: (
+    "primary": #db9e3f,
+    "info": #4b67af,
+    "time": #777,
+    // 存在white变量，防止冲突
+    "white": #fff,
+    "light": #f9f9f9,
+    "light-1": #d4d9de,
+    "grey": #999,
+    "grey-1": #666,
+    "grey-2": #333,
+    "dark": #343440,
+    "dark-1": #222,
+    "black": #000,
+);
+$border-color: map-get($colors, "light-1");
+// font size
+// todo 注释换行
+$font-size: (
+    // 8
+    min: 0.615385,
+    // 10
+    xxs: 0.769231,
+    // 11
+    xs: 0.846154,
+    // 12
+    sm: 0.923077,
+    // 13
+    md: 1,
+    // 14
+    lg: 1.076923,
+    // 16
+    xl: 1.230769
+);
+
+// flex 多行
+$flex-jc: (
+    start: flex-start,
+    end: flex-end,
+    center: center,
+    between: space-between,
+    evenly: space-evenly,
+    around: space-around,
+    stretch: stretch,
+);
+
+// flex 单行
+$flex-ai: (
+    start: flex-start,
+    end: flex-end,
+    center: center,
+    stretch: stretch,
+);
+
+$spacing-types: (
+    m: margin,
+    p: padding,
+);
+$spacing-directions: (
+    t: top,
+    b: bottom,
+    l: left,
+    r: right,
+);
+$spacing-sizes: (
+    0: 0,
+    1: 0.25,
+    2: 0.5,
+    3: 1,
+    4: 1.5,
+    5: 3,
+);
+
+// iconfont
+.iconfont::before {
+    font-size: map-get($font-size, "lg") * $base-font-size;
+}
+
+// text-ellipsis
+.text-ellipsis {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+// vertical-align
+$vertical-align: (
+    baseline: baseline,
+    top: top,
+    middle: middle,
+    bottom: bottom,
+);

@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 const Schema = new mongoose.Schema({
     title: { type: String },
     content: { type: String },
-    category: [{
+    categories: [{
         type: mongoose.SchemaTypes.ObjectId,
         ref: 'Category'
     }]

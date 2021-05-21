@@ -20,7 +20,7 @@
           <el-form-item label="头像" prop="avatar">
             <!-- tag get baseURL -->
             <el-upload class="avatar-uploader" :action="uploadURL" :show-file-list="false"
-              :on-success="afterUpload">
+              :on-success="afterUpload" :headers="getAuthHeaders()">
               <img v-if="model.avatar" :src="model.avatar" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>
@@ -90,7 +90,8 @@
               </el-form-item>
               <el-form-item label="图标">
                 <el-upload class="avatar-uploader" :action="uploadURL"
-                  :show-file-list="false" :on-success="res=>$set(skill,'icon',res.url)">
+                  :show-file-list="false" :on-success="res=>$set(skill,'icon',res.url)"
+                  :headers="getAuthHeaders()">
                   <img v-if="skill.icon" :src="skill.icon" class="avatar">
                   <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                 </el-upload>

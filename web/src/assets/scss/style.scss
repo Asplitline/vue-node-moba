@@ -1,0 +1,147 @@
+@import "variables.scss";
+@import url(//at.alicdn.com/t/font_2561412_p7w02dg6txr.css);
+* {
+    box-sizing: border-box;
+    // 清除外轮廓
+    outline: none;
+}
+
+html {
+    font-size: 13px;
+}
+
+body {
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, STHeiTi, 微软雅黑, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    background-color: #ededed;
+}
+
+a {
+    color: #343440;
+    text-decoration: none;
+}
+
+//
+@each $colorKey, $color in $colors {
+    .text-#{$colorKey} {
+        color: $color;
+    }
+    .bg-#{$colorKey} {
+        background-color: $color;
+    }
+}
+
+// text algin
+@each $var in (left, center, right) {
+    // 加 #
+    .text-#{$var} {
+        text-align: $var !important;
+    }
+}
+
+@each $sizeKey, $size in $font-size {
+    .fs-#{$sizeKey} {
+        font-size: $size * $base-font-size;
+    }
+}
+// vertical-align
+@each $verticalKey, $verticalDirection in $vertical-align {
+    va-#{$verticalKey} {
+        vertical-align: $verticalDirection;
+    }
+}
+// flex
+.d-flex {
+    display: flex;
+}
+.flex-wrap {
+    flex-wrap: wrap;
+}
+.flex-column {
+    flex-direction: column;
+}
+.flex-1 {
+    flex: 1;
+}
+.flex-grow-1 {
+    flex-grow: 1;
+}
+
+@each $key, $value in $flex-jc {
+    .jc-#{$key} {
+        justify-content: $value;
+    }
+}
+
+@each $key, $value in $flex-ai {
+    .ai-#{$key} {
+        align-items: $value;
+    }
+}
+// 键名 加 #
+@each $typeKey, $type in $spacing-types {
+    // @each $sizeKey, $size in $spacing-sizes {
+    // }
+    @each $sizeKey, $size in $spacing-sizes {
+        // m-0
+        .#{$typeKey}-#{$sizeKey} {
+            #{$type}: $size * $spacing-base-size;
+        }
+        // mx-0
+        .#{$typeKey}x-#{$sizeKey} {
+            #{$type}-left: $size * $spacing-base-size;
+            #{$type}-right: $size * $spacing-base-size;
+        }
+        // my-0
+        .#{$typeKey}y-#{$sizeKey} {
+            #{$type}-top: $size * $spacing-base-size;
+            #{$type}-bottom: $size * $spacing-base-size;
+        }
+        // mt-1
+        @each $directionKey, $direction in $spacing-directions {
+            .#{$typeKey}#{$directionKey}-#{$sizeKey} {
+                #{$type}-#{$direction}: $size * $spacing-base-size;
+            }
+        }
+    }
+}
+
+// btn
+.btn {
+    outline: none;
+    border: none;
+    border-radius: 0.153846rem;
+    font-size: map-get($font-size, "xs") * $base-font-size;
+    padding: 0.25rem 0.4rem;
+}
+
+.nav {
+    display: flex;
+    .nav-item {
+        color: map-get($colors, "black");
+        border-bottom: 3px solid transparent;
+        padding-bottom: 0.1rem;
+        &.active {
+            color: map-get($colors, "primary");
+            border-bottom-color: map-get($colors, "primary");
+        }
+    }
+    &.nav-inverse {
+        .nav-item {
+            color: map-get($colors, "white");
+            &.active {
+                border-bottom-color: map-get($colors, "white");
+            }
+        }
+    }
+}
+
+// img
+.w100 {
+    width: 100%;
+}
+
+.h100 {
+    height: 100%;
+}

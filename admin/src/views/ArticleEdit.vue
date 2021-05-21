@@ -7,7 +7,7 @@
         <el-input v-model="model.title"></el-input>
       </el-form-item>
       <el-form-item label="分类" prop="category">
-        <el-select v-model="model.category" multiple>
+        <el-select v-model="model.categories" multiple>
           <el-option v-for="category in categories" :key="category._id"
             :label="category.name" :value="category._id"></el-option>
         </el-select>

@@ -15,7 +15,7 @@
         <el-col :span="12" v-for="(item,index) in model.items" :key="index">
           <el-form-item label="封面">
             <el-upload class="avatar-uploader" :action="uploadURL" :show-file-list="false"
-              :on-success="res=>$set(item,'cover',res.url)">
+              :on-success="res=>$set(item,'cover',res.url)" :headers="getAuthHeaders()">
               <img v-if="item.cover" :src="item.cover" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon"></i>
             </el-upload>

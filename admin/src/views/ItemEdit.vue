@@ -9,7 +9,7 @@
       <el-form-item label="图标" prop="icon">
         <!-- tag get baseURL -->
         <el-upload class="avatar-uploader" :action="uploadURL" :show-file-list="false"
-          :on-success="afterSuccess">
+          :on-success="afterSuccess" :headers="getAuthHeaders()">
           <img v-if="model.icon" :src="model.icon" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
