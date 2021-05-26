@@ -16,7 +16,8 @@ module.exports = app => {
         if (req.model.modelName === 'Category') {
             queryOptions.populate = 'parent'
         }
-        const model = await req.model.find().setOptions(queryOptions).limit(10)
+        const model = await req.model.find().setOptions(queryOptions)
+        // .limit(10)
         res.send(model)
     })
     // 根据id请求资源

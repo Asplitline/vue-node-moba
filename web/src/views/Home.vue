@@ -24,14 +24,27 @@
     </div>
     <!-- end of nav-icons -->
     <!-- card-list -->
-    <m-card-list title="新闻详情" icon="Menu" :categories="categories">
+    <m-card-list title="新闻详情" icon="Menu" :categories="newsList">
       <template #list="{category}">
-        <router-link tag="div" to="/" v-for="(news,i) in category.newsList" :key="i"
-          class="d-flex jc-bettwen mb-3">
-          <span class="mr-2 fs-xxs tag">{{category.name}}</span>
+        <router-link tag="div" :to="`/article/${news._id}`"
+          v-for="(news,i) in category.newsList" :key="i" class="d-flex jc-bettwen mb-3">
+          <span class="mr-2 fs-xxs tag">{{news.categoryName}}</span>
           <span class="flex-1 fs-lg text-ellipsis mr-3">{{news.title}}</span>
           <span class="text-time fs-sm mt-1">{{news.createdAt | time }}</span>
         </router-link>
+      </template>
+    </m-card-list>
+
+    <m-card-list title="英雄列表" icon="trailhead" :categories="heroList">
+      <template #list="{category}">
+        <div class="d-flex flex-wrap" style="margin:0 -1rem;">
+          <router-link tag="div" to="/" v-for="(hero,i) in category.heroList" :key="i"
+            style="width:20%;" class="p-2">
+            <img :src="hero.avatar" class="w100">
+            <div class="text-center">{{hero.name}}</div>
+          </router-link>
+        </div>
+
       </template>
     </m-card-list>
     <!-- end of card-list -->
@@ -62,20 +75,18 @@ export default {
           delay: 1500
         }
       },
-      categories: ['热门', '新闻', '公告', '活动', '赛事'].map((i) => ({
-        name: i,
-        list: new Array(5).fill({}).map((item) => ({
-          category: i,
-          title: '体验服专区福利升级，专区功能恢复使用',
-          time: '05/20'
-        }))
-      }))
+      newsList: [],
+      heroList: []
     }
   },
   methods: {
-    async fetchData() {
+    async fetchNews() {
       const { data } = await this.$http.get('news/list')
-      this.categories = data
+      this.newsList = data
+    },
+    async fecthHeroes() {
+      const { data } = await this.$http.get('heroes/list')
+      this.heroList = data
     }
   },
   filters: {
@@ -84,7 +95,8 @@ export default {
     }
   },
   created() {
-    this.fetchData()
+    this.fetchNews()
+    this.fecthHeroes()
   }
 }
 </script>

@@ -4,6 +4,7 @@ Vue.use(VueRouter)
 
 const Home = () => import('@/views/Home.vue')
 const Main = () => import('@/views/Main.vue')
+const Article = () => import('@/views/Article.vue')
 const Test = () => import('@/views/Test.vue')
 const routes = [
   {
@@ -12,6 +13,7 @@ const routes = [
     component: Main,
     children: [
       { path: '/', name: 'Home', component: Home },
+      { path: '/article/:id', name: 'Article', component: Article, props: true },
     ]
   },
   {

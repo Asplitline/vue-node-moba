@@ -39,7 +39,9 @@ export default {
   },
   data() {
     return {
-      cardSwiperOptions: {},
+      cardSwiperOptions: {
+        autoHeight: true
+      },
       active: 0
     }
   },

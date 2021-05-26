@@ -11,12 +11,12 @@ const Schema = new mongoose.Schema({
         tips: { type: String }
     }],
     scores: {
-        difficult: { type: Number },
-        skills: { type: Number },
-        attack: { type: Number },
-        survive: { type: Number },
+        difficult: { type: Number, default: 0 },
+        skills: { type: Number, default: 0 },
+        attack: { type: Number, default: 0 },
+        survive: { type: Number, default: 0 },
     },
-    category: [{
+    categories: [{
         type: mongoose.SchemaTypes.ObjectId,
         ref: 'Category'
     }],

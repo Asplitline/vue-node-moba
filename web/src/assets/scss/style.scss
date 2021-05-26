@@ -1,5 +1,5 @@
 @import "variables.scss";
-@import url(//at.alicdn.com/t/font_2561412_p7w02dg6txr.css);
+@import url(//at.alicdn.com/t/font_2561412_uwalds0v7wg.css);
 * {
     box-sizing: border-box;
     // 清除外轮廓
@@ -22,7 +22,7 @@ a {
     text-decoration: none;
 }
 
-//
+// color
 @each $colorKey, $color in $colors {
     .text-#{$colorKey} {
         color: $color;
@@ -32,7 +32,7 @@ a {
     }
 }
 
-// text algin
+// text-algin
 @each $var in (left, center, right) {
     // 加 #
     .text-#{$var} {
@@ -40,6 +40,7 @@ a {
     }
 }
 
+// font-size
 @each $sizeKey, $size in $font-size {
     .fs-#{$sizeKey} {
         font-size: $size * $base-font-size;
@@ -49,6 +50,12 @@ a {
 @each $verticalKey, $verticalDirection in $vertical-align {
     va-#{$verticalKey} {
         vertical-align: $verticalDirection;
+    }
+}
+// border
+@each $borderKey in (left, right, top, bottom) {
+    .border-#{$borderKey} {
+        border-#{$borderKey}: 1px solid $border-color;
     }
 }
 // flex
@@ -68,17 +75,19 @@ a {
     flex-grow: 1;
 }
 
+// justify-content
 @each $key, $value in $flex-jc {
     .jc-#{$key} {
         justify-content: $value;
     }
 }
-
+// align-items
 @each $key, $value in $flex-ai {
     .ai-#{$key} {
         align-items: $value;
     }
 }
+// margin paddign
 // 键名 加 #
 @each $typeKey, $type in $spacing-types {
     // @each $sizeKey, $size in $spacing-sizes {
